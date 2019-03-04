@@ -1,0 +1,876 @@
+#ifndef	__DEFINE_H__
+#define __DEFINE_H__
+
+//定义常量, 常数
+#include "bintohex.h"
+//#include "fm318Reg.h"
+
+#define ecode   
+#define bdata
+#define idata
+#define near
+#define code    
+#define xdata
+#define reentrant
+#define bit unsigned char
+#define huge
+
+//#define EA 0
+
+#define	CARDKEY 	0	//卡座类型：0:常开; 1:常闭
+#define LCDTYPE		0	//液晶：0:标准; 3:sld
+
+//从0x811800开始会保存如下信息
+#define HXVAR(object, addr)   (*((object ecode *) (addr)))
+#define const_tx_flag  		HXVAR( unsigned char, 0x811800 )	//调校标志(0xc3为编程调校)
+#define const_rtc_adj_top 	HXVAR( float,         0x811805 )	//顶点误差ppm
+#define const_XcapH		HXVAR( unsigned char, 0x81180d )	//调校时使用的电容值
+#define const_XcapL		HXVAR( unsigned char, 0x81180e )
+
+#define const_adc_Testq	 	HXVAR( unsigned int , 0x81204e )	//成测时PTAT ADC值(新ADCtrim值下的转换)
+#define const_adc_TrimH 	HXVAR( unsigned char, 0x812054 )	//调校时使用的ADCtrim值
+#define const_adc_TrimL 	HXVAR( unsigned char, 0x812055 )	//LSB=1.5mV
+#define const_adc_OffsetA	HXVAR( unsigned int , 0x812056 )
+#define const_adc_TrimBH 	HXVAR( unsigned char, 0x812064 )	//LSB=2.34mV
+#define const_adc_TrimBL 	HXVAR( unsigned char, 0x812065 )
+#define const_adc_OffsetB 	HXVAR( unsigned int , 0x812066 )
+#define const_lvd_40v 		HXVAR( unsigned char, 0x812029 )	//lvd4.0
+#define const_lvd_42v 		HXVAR( unsigned char, 0x81202A )	//lvd4.2
+#define const_lvd_44v 		HXVAR( unsigned char, 0x81202B )	//lvd4.4
+#define const_lvd_46v 		HXVAR( unsigned char, 0x81202C )	//lvd4.6
+
+#define const_temp_TestA 	HXVAR( unsigned char, 0x812090 )	//测试时温度整数位
+#define const_temp_TestB 	HXVAR( unsigned char, 0x812091 )	//测试时温度小数位
+#define const_adc_Test	 	HXVAR( unsigned int , 0x812092 )	//测试时PTAT ADC值
+//#define const_adc_TestH 	HXVAR( unsigned char, 0x812092 )	//测试时PTAT ADC值H
+//#define const_adc_TestL 	HXVAR( unsigned char, 0x812093 )	//测试时PTAT ADC值L
+
+
+
+
+unsigned char GPIO0;
+unsigned char GPIO1;  
+unsigned char GPIO2;
+unsigned char GPIO3;
+unsigned char GPIO4;
+unsigned char GPIO5;
+unsigned char GPIO6;
+unsigned char GPIO7;
+unsigned char GPIO8;
+
+
+
+
+
+#define LCDLEDON 	GPIO8 &= B1111_1011
+#define LCDLEDOFF 	GPIO8 |= B0000_0100
+#define SHIDUANCTRL_ON	GPIO6 &= B1101_1111
+#define SHIDUANCTRL_OFF GPIO6 |= B0010_0000
+
+#define RELAYON1 	GPIO8 |= B0000_0001
+#define RELAYOFF1 	GPIO8 &= B1111_1110
+#define RELAYON2 	GPIO8 |= B0000_0010
+#define RELAYOFF2 	GPIO8 &= B1111_1101
+
+#define RELAYON3 	GPIO8 |= B0000_0001
+#define RELAYOFF3 	GPIO8 &= B1111_1110		//外置-gpio8.0
+
+#define PLUSELED_ON	GPIO2 &= B0111_1111		//预留
+#define PLUSELED_OFF	GPIO2 |= B1000_0000		//预留
+
+#define EVENOUTOFF 	GPIO3 &= B1101_1111		//无事件上报
+#define EVENOUTON 	GPIO3 |= B0010_0000		//有事件上报
+#define PLC_RST0 	GPIO3 &= B1111_0111
+#define PLC_RST1 	GPIO3 |= B0000_1000
+
+#define BEEPALARMON 	do{if(Beep_Io_Ctrl==0x55)GPIO4 &= B1111_1011;else GPIO5 &= B0111_1111;}while(0)
+#define BEEPALARMOFF 	do{if(Beep_Io_Ctrl==0x55)GPIO4 |= B0000_0100;else GPIO5 |= B1000_0000;}while(0)
+
+#define RELAYCTRLON	GPIO6 |= B0000_0001
+#define RELAYCTRLOFF	GPIO6 &= B1111_1110
+#define ESAMPOWEROFF	GPIO7 |= B0000_0001
+#define ESAMPOWERON	GPIO7 &= B1111_1110
+#define RELAYLEDON	GPIO6 &= B1111_0111
+#define RELAYLEDOFF	GPIO6 |= B0000_1000
+#define R485CTRLS	GPIO6 &= B1111_1011
+#define R485CTRLR	GPIO6 |= B0000_0100
+
+#define RELAYTEST_P	(GPIO6&B0000_0010) == B0000_0010
+#define RELAYTEST_N	(GPIO6&B0000_0010) != B0000_0010
+
+#define DISKEY_P 	(GPIO4&B0010_0000) == B0010_0000
+#define DISKEY_N 	(GPIO4&B0010_0000) != B0010_0000
+#define COVKEY_N 	(GPIO4&B0100_0000) == B0100_0000
+#define COVKEY_P 	(GPIO4&B0100_0000) != B0100_0000
+#define PROKEY_P	(GPIO8&B0000_0010) == B0000_0010
+#define PROKEY_N	(GPIO8&B0000_0010) != B0000_0010
+#define RXHW_P		(GPIO1&B0001_0000) == B0001_0000
+#define RXHW_N		(GPIO1&B0001_0000) != B0001_0000
+
+#if(CARDKEY==1)
+#define KEY_N		(GPIO8&B0001_0000) == B0001_0000
+#define KEY_P		(GPIO8&B0001_0000) != B0001_0000
+#elif(CARDKEY==0)
+#define KEY_P		(GPIO8&B0001_0000) == B0001_0000
+#define KEY_N		(GPIO8&B0001_0000) != B0001_0000
+#endif
+
+#define RST_ESAM_H	GPIO8 |= (~B1111_0111)
+#define RST_ESAM_L	GPIO8 &= ( B1111_0111)
+#define RST_CARD_H		GPIO8 |= (~B1111_1111)
+#define RST_CARD_L		GPIO8 &= ( B1111_1111)
+
+#define METER_RST1	GPIO5 |= B0010_0000		//计量芯片复位脚
+#define METER_RST0	GPIO5 &= B1101_1111
+
+//射频SPI接口定义
+#define	RFSPIRST0		GPIO8 &= B1101_1111
+#define	RFSPIRST1		GPIO8 |= B0010_0000
+#define	RFSPICLK0		GPIO7 &= B1011_1111
+#define	RFSPICLK1		GPIO7 |= B0100_0000
+#define	RFSPIMO0		GPIO7 &= B1110_1111
+#define	RFSPIMO1		GPIO7 |= B0001_0000
+#define	RFSPICS0		GPIO7 &= B0111_1111
+#define	RFSPICS1		GPIO7 |= B1000_0000
+#define	RFSPIMIGPIO		GPIO7
+#define	RFSPIMIBIT		5
+
+
+//;============================EEPROM存储定义==========================================
+//------------------自动crc校验区、参数区	
+#define		ee_remainmoney_page		0x00		//剩余金额数据页地址
+	#define		ee_remainmoney_inpage		0
+	#define		ee_remainmoney_lenth		16
+#define		ee_esampara_page		0x00		//esam里报警金额到身份认证时效参数页地址
+	#define		ee_esampara_inpage		ee_remainmoney_inpage+ee_remainmoney_lenth+4
+	#define		ee_esampara_lenth		29	
+#define		ee_temperature_page		0x00		//温度补偿系数
+	#define		ee_temperature_inpage		ee_esampara_inpage+ee_esampara_lenth+2
+	#define		ee_temperature_lenth		11	
+				
+#define		ee_fwdl_page			0x02		//正向电量数据页地址
+	#define		ee_fwdl_inpage			0
+	#define		ee_fwdl_lenth			24
+#define		ee_bkdl_page			0x02		//反向电量数据页地址
+	#define		ee_bkdl_inpage			ee_fwdl_inpage+ee_fwdl_lenth+4
+	#define		ee_bkdl_lenth			24
+#define		ee_commaddr_page		0x02		//通讯地址页地址
+	#define		ee_commaddr_inpage		ee_bkdl_inpage+ee_bkdl_lenth+4
+	#define		ee_commaddr_lenth		6	
+
+#define		ee_limitmenory_page		0x04		//透支金额囤积金额和合闸允许金额页地址
+	#define		ee_limitmenory_inpage		0
+	#define		ee_limitmenory_lenth		12
+#define		ee_meterconst_page		0x04		//脉冲常数页地址
+	#define		ee_meterconst_inpage		ee_limitmenory_inpage+ee_limitmenory_lenth+2
+	#define		ee_meterconst_lenth		4
+#define		ee_emupara_page			0x04		//计量芯片参数页地址
+	#define		ee_emupara_inpage		ee_meterconst_inpage+ee_meterconst_lenth+2
+	#define		ee_emupara_lenth		20
+#define		ee_password_page		0x04		//03级和04级密码页地址
+	#define		ee_password_inpage		ee_emupara_inpage+ee_emupara_lenth+2
+	#define		ee_password4_inpage		ee_emupara_inpage+ee_emupara_lenth+8
+	#define		ee_password_lenth		4
+//------------------
+#define		ee_loop_displayitem_page	0x06		//循环显示项目页地址
+#define		ee_loop_displayitem_1_page	0x07		//循环显示项目页地址
+#define		ee_key_displayitem_page		0x08		//按键显示项目页地址
+#define		ee_key_displayitem_1_page	0x09		//按键显示项目页地址
+	#define		ee_displayitem_lenth		62		
+#define		ee_tariffprice1_page	0x0a		//当前套费率电价页地址
+#define		ee_tariffprice2_page	0x0b		//备用套费率电价页地址
+	#define		ee_tariffprice_inpage		0
+	#define		ee_tariffprice_lenth		16
+#define		ee_event_point_page		0x0a		//冻结和事件指针页地址
+	#define		ee_eventpoint_inpage		18
+#define		ee_validrec_page		0x0c		//冻结和事件有效指针页
+	#define		ee_timingf_inpage		0x00	//00h定时冻结
+	#define		ee_dayf_inpage			0x01	//01h日冻结
+	#define		ee_histroyf_inpage		0x02	//02h结算电量
+	#define		ee_hourf_inpage			0x03	//03h整点冻结
+	#define		ee_immedf_inpage		0x04	//瞬时冻结
+	#define		ee_agreesqf_inpage		0x05	//约定冻结时区表切换
+	#define		ee_agreesdf_inpage		0x06	//约定冻结日时段表切换
+	#define		ee_agreeflf_inpage		0x07	//约定冻结费率电价切换
+	#define		ee_agreejtf_inpage		0x08	//约定冻结阶梯切换
+	#define		ee_jtsqswith_inpage		0x09	//阶梯时区切换
+	#define		ee_modeswith_inpage		0x0A	//费控模式切换
+	#define		ee_clearn_inpage		0x0B	//清零
+	#define		ee_cleareventn_inpage		0x0C	//清事件
+	#define		ee_powerdownn_inpage		0x0D	//掉电
+	#define		ee_setclockn_inpage		0x0E	//校时
+	#define		ee_covern_inpage		0x0F	//开表盖
+	#define		ee_maxi_inpage			0x10	//过流
+	#define		ee_openrelayn_inpage		0x11	//跳闸
+	#define		ee_closerelayn_inpage		0x12	//合闸
+	#define		ee_programn_inpage		0x13	//编程
+	#define		ee_shiqun_inpage		0x14	//时区表编程
+	#define		ee_shiduann_inpage		0x15	//时段表编程
+	#define		ee_jieshuann_inpage		0x16	//结算日编程
+	#define		ee_keysetn_inpage		0x17	//密钥更新编程
+	#define		ee_combn_inpage			0x18	//组合方式编程
+	#define		ee_relayerrn_inpage		0x19	//负荷开关误动作
+	#define		ee_powererrn_inpage		0x1A	//电源异常
+	#define		ee_weekdayn_inpage		0x1B	//周休日编程
+	#define		ee_errcardn_inpage		0x1C	//异常插卡	
+	#define		ee_batterlow_inpage		0x1D	//电池欠压
+	#define		ee_buymoneyn_inpage		0x1E	//购电
+	#define		ee_dmoneyn_inpage		0x1F	//退费记录
+	#define		ee_flpricen_inpage		0x20	//费率电价编程
+	#define		ee_jtpricen_inpage		0x21	//阶梯表编程
+	#define		ee_eventpoint_lenth		0x22	//指针数据长度
+#define		ee_curyearjs_page		0x0c		//当前第1~6年结算日
+	#define		ee_curyearjs_inpage	0x00+ee_eventpoint_lenth+2
+	#define		ee_curyearjs_len		18
+#define		ee_shiqu1_page			0x0e		//第一套时区页地址
+#define		ee_shiqu2_page			0x0f		//第二套时区页地址
+	#define		ee_shiqu_lenth			42
+//------------------
+#define		ee_displaypara_page		0x0a		//显示数据页地址
+	#define		ee_displaypara_inpage		54		
+	#define		ee_displaypara_lenth		8	
+#define		ee_weekholiday_page		0x0e		//周休日和周休日时段表号页地址
+	#define		ee_weekholiday_inpage		44
+	#define		ee_weekholiday_lenth		18
+//------------------		
+#define		ee_shiduantable1_1_page		0x10		//第一套第1时段表页地址
+#define		ee_shiduantable1_2_page		0x11		//第一套第2时段表页地址
+#define		ee_shiduantable1_3_page		0x12		//第一套第3时段表页地址
+#define		ee_shiduantable1_4_page		0x13		//第一套第4时段表页地址
+#define		ee_shiduantable1_5_page		0x14		//第一套第5时段表页地址
+#define		ee_shiduantable1_6_page		0x15		//第一套第6时段表页地址
+#define		ee_shiduantable1_7_page		0x16		//第一套第7时段表页地址
+#define		ee_shiduantable1_8_page		0x17		//第一套第8时段表页地址
+#define		ee_shiduantable2_1_page		0x18		//第二套第1时段表页地址
+#define		ee_shiduantable2_2_page		0x19		//第二套第2时段表页地址
+#define		ee_shiduantable2_3_page		0x1a		//第二套第3时段表页地址
+#define		ee_shiduantable2_4_page		0x1b		//第二套第4时段表页地址
+#define		ee_shiduantable2_5_page		0x1c		//第二套第5时段表页地址
+#define		ee_shiduantable2_6_page		0x1d		//第二套第6时段表页地址
+#define		ee_shiduantable2_7_page		0x1e		//第二套第7时段表页地址
+#define		ee_shiduantable2_8_page		0x1f		//第二套第8时段表页地址
+	#define		ee_shiduantable_lenth		42
+//------------------
+#define		ee_eventthreshold_page		0x12		//事件判断设定范围页地址
+	#define		ee_eventthreshold_inpage	44
+	#define		ee_eventthreshold_lenth		6			
+#define		ee_histroyparameter_page	0x14		//结算时间参数页地址
+	#define		ee_histroyparameter_inpage	44
+	#define		ee_histroyparameter_lenth	6
+#define		ee_feik_number_page		0x14		//时区时段费率阶梯数页地址
+	#define		ee_feiknumber_inpage		ee_histroyparameter_inpage+ee_histroyparameter_lenth+2
+	#define		ee_feiknumber_lenth		8				
+#define		ee_freezeparameter_page		0x16		//冻结时间参数页地址
+	#define		ee_freezeparameter_inpage	44
+	#define		ee_freezeparameter_lenth	12	
+#define		ee_factorymode_page		0x17		//生产模式控制字(西力特殊要求)	
+	#define		ee_factorymoder_inpage		44
+	#define		ee_factorymode_lenth		1
+#define		ee_pre_dayfreeze_page		0x18		//专门用于上电补存的上一次日冻结时间页地址
+	#define		ee_predayfreeze_inpage		44
+	#define		ee_predayfreeze_lenth		5			
+#define		ee_rtcadj_time_page		0x18		//写常温顶点调校值时时间记录页地址(始终不清)
+	#define		ee_rtcadjtime_inpage		ee_predayfreeze_inpage+ee_predayfreeze_lenth+2
+	#define		ee_rtcadjtime_lenth		10		
+#define		ee_usercard_serial_page		0x19		//卡序列号页地址
+	#define		ee_usercard_serial_inpage	44
+	#define		ee_usercard_serial_lenth	10		
+#define		ee_changecontrol_page		0x1a		//时区时段启动控制字页地址
+	#define		ee_changecontrol_inpage		44
+	#define		ee_changecontrol_lenth		2
+#define 	ee_operatorcode_page		0x1a		//操作者代码页地址
+	#define		ee_operatorcode_inpage		ee_changecontrol_inpage+ee_changecontrol_lenth+2
+	#define		ee_operatorcode_lenth		4	
+#define		ee_keystatus_page		0x1b		//密钥状态页地址
+	#define		ee_keystatus_inpage		44
+	#define		ee_keystatus_lenth		18	
+#define		ee_meterstatus1_page		0x1c		//电表状态字1页地址
+	#define		ee_meterstatus1_inpage		44
+	#define		ee_meterstatus1_lenth		3
+#define		ee_keystatus1_page		0x1c		//密钥状态页1地址
+	#define		ee_keystatus1_inpage		ee_meterstatus1_inpage+ee_meterstatus1_lenth+2
+	#define		ee_keystatus1_lenth		9	
+#define		ee_xtlfstop_time_page		0x1d		//晶振停振起始时间页地址
+	#define		ee_xtlfstoptime_inpage		44
+	#define		ee_xtlfstoptime_lenth		7		
+#define		ee_wdt_page			0x1e		//上电复位和看门狗复位次数页地址
+	#define		ee_wdt_inpage			44	
+	#define		ee_wdt_lenth			8
+#define		ee_newclock_page		0x1e		//新时钟起始时间页地址
+	#define		ee_newclock_inpage		ee_wdt_inpage+ee_wdt_lenth+2
+	#define		ee_newclock_lenth		7
+#define		ee_esam_money_page		0x1f		//esam恢复ee时金额备份页地址
+	#define		ee_esam_money_inpage	44
+	#define		ee_esam_money_lenth	15	
+
+#define		ee_featureword_page		0x20		//特征模式字页地址
+	#define		ee_featureword_inpage		0
+	#define		ee_featureword_lenth		30
+#define		ee_starttimer_page		0x20		//时区时段费率电价阶和梯电价启动时间页地址
+	#define		ee_starttimer_inpage		ee_featureword_inpage+ee_featureword_lenth+2
+	#define		ee_starttimer_lenth		30
+#define		ee_7051_page			0x22		//计量芯片调校页地址
+#define		ee_7051adj_page			0x24		//电压补偿页
+#define		ee_reportdata_page		0x26		//停电事件上报数据存储页(状态字1,上报状态字,新增次数和,复位定时器)
+	#define		ee_reportdata_lenth		56	
+#define		ee_power_down_page		0x27		//掉电页数据页地址
+	#define		ee_powerdown_inpage		0
+	#define		ee_powerdown_lenth		41	//其中有11字节预留
+	#define		ee_loadpoint_lenth		16	
+#define		ee_jtshiqu1_page		0x28		//当前套阶梯时区表
+#define		ee_jtshiqu2_page		0x29		//备用套阶梯时区表
+	#define		ee_jtshiqu_inpage		0
+	#define		ee_jtshiqu_len			12	
+#define		ee_ptatvalue_page		0x2a		//查表温度ADC页地址
+	#define		ee_ptatvalue_inpage		0
+	#define		ee_ptatvalue_lenth		42
+#define		ee_capvalue_page		0x2b		//查表电容偏置页地址
+	#define		ee_capvalue_inpage		0
+	#define		ee_capvalue_lenth		42
+#define		ee_hearttime_page					0x2a		//心跳间隔时间页地址
+	#define		ee_hearttime_inpage			ee_ptatvalue_lenth+2
+	#define		ee_hearttime_lenth			1
+
+//------------------非自动crc校验区	
+#define		ee_holiday_page			0x30		//节假日时段表页地址,支持60个公共假日(共4页)
+#define		ee_holiday_lenth		60									
+//------------------用电量计算区
+#define		ee_pre1_histroyusedl_page	0x36		//上1-2结算历史用电量页地址	
+#define		ee_pre1_mhistroyusedl_page	0x37		//上1-2月历史用电量页地址
+	#define		ee_histroyusedl_lenth		16	//数据长度16字节
+#define		ee_pre1_yhistroyusedl_page	0x38		//上1-7年历史用电量页地址	
+	#define		ee_yhistroyusedl_lenth		56	//数据长度56字节	
+//------------------规格区
+#define		ee_protocolver_page		0x34		//协议版本号页地址
+	#define		ee_protocolver_inpage		48
+	#define		ee_protocolver_lenth		16
+#define		ee_softver_page			0x35		//软件版本号页地址
+	#define		ee_softver_inpage		0
+	#define		ee_softver_lenth		32
+#define		ee_hardver_page			0x35		//硬件版本号页地址
+	#define		ee_hardver_inpage		32
+	#define		ee_hardver_lenth		32	
+#define		ee_factorynum_page		0x36		//厂家编码页地址
+	#define		ee_factorynum_inpage		24
+	#define		ee_factorynum_lenth		32
+#define		ee_softbk_page			0x36		//软件备案号页地址
+	#define		ee_softbk_inpage		56
+	#define		ee_softbk_lenth			8
+#define		ee_ratedcurr_page		0x37		//额定电流页地址
+	#define		ee_ratedcurr_inpage		24
+	#define		ee_ratedcurr_lenth		6
+#define		ee_maxcurr_page			0x37		//最大电流页地址
+	#define		ee_maxcurr_inpage		30
+	#define		ee_maxcurr_lenth		6
+#define		ee_activeclass_page		0x37		//电表精度等级页地址 
+	#define		ee_activeclass_inpage		36
+	#define		ee_activeclass_lenth		4	
+#define		ee_matertype_page		0x37		//电表型号页地址
+	#define		ee_matertype_inpage		40
+	#define		ee_matertype_lenth		10						
+#define		ee_meterdate_page		0x37		//生产日期
+	#define		ee_meterdate_inpage		50
+	#define		ee_meterdate_lenth		10			
+//------------------本地费控编程记录区	
+#define		ee_recordnumber_page		0x39		//事件记录次数页
+	#define		ee_recordnumber_lenth		63	//数据长度63字节
+#define         ee_maxi_note_page             	0x3a		//电流过载记录页地址
+	#define		ee_maxinote_inpage		0
+	#define		ee_maxinote_lenth		38	//数据长度38字节
+#define		ee_jtpricerecord_page		0x3a		//阶梯表编程记录(发生时间6和操作者代码4)
+	#define		ee_jtpricerecord_inpage		ee_maxinote_inpage+ee_maxinote_lenth	
+	#define		ee_jtpricerecord_len		10
+#define		ee_keysetrecord_page		0x3a		//密钥更新记录页
+	#define		ee_keysetrecord_inpage		ee_jtpricerecord_inpage+ee_jtpricerecord_len
+	#define		ee_keysetrecord_len		15
+#define		ee_batterlow_note_page		0x43		//电池欠压记录页，只有一条记录
+	#define		ee_batterlownote_inpage		ee_keysetrecord_inpage
+	#define		ee_batterlownote_len		14
+#define		ee_powerdown_note_page		0x44		//掉电事件记录页地址
+	#define		ee_powerdownnote_inpage		0
+	#define		ee_powerdownnote_lenth		28
+#define		ee_dmoney_note_page		0x44		//退费事件记录页地址
+	#define		ee_dmoneynote_inpage		ee_powerdownnote_inpage+ee_powerdownnote_lenth
+	#define		ee_dmoneynote_lenth		19
+#define		ee_errcardrecord_page		0x58		//异常插卡记录
+	#define		ee_errcardrecord_inpage		0
+	#define		ee_errcardrecord_len		36	
+#define		ee_buydl_note_page		0x58		//购电事件记录页地址
+	#define		ee_buydlnote_inpage		ee_errcardrecord_inpage+ee_errcardrecord_len	
+	#define		ee_buydlnote_lenth		23	//数据长度23字节	
+	
+//------------------事件记录区
+#define		ee_cleardl_note_page		0x62		//清电量事件页地址
+	#define		ee_cleardlnote_inpage		0
+	#define		ee_cleardlnote_lenth		18
+#define		ee_clearevent_note_page		0x62		//清事件记录页地址
+	#define		ee_cleareventknote_inpage	ee_cleardlnote_inpage+ee_cleardlnote_lenth
+	#define		ee_cleareventnote_lenth		14
+#define		ee_week_note_page			0x62	//周休日编程记录
+	#define		ee_week_note_inpage		ee_cleareventknote_inpage+ee_cleareventnote_lenth
+	#define		ee_week_note_len		11
+#define		ee_powererr_note_page		0x62		//电源异常记录页地址
+	#define		ee_powererrnote_inpage		ee_week_note_inpage+ee_week_note_len
+	#define		ee_powererrnote_lenth		20	
+	
+#define		ee_closerelay_note_page		0x6c		//合闸事件记录页地址
+	#define		ee_closerelaynote_inpage	0
+	#define		ee_closerelaynote_lenth		18
+#define		ee_openrelay_note_page		0x6c		//断闸事件记录页地址
+	#define		ee_openrelaynote_inpage		ee_closerelaynote_inpage+ee_closerelaynote_lenth		
+	#define		ee_openrelaynote_lenth		18	
+#define		ee_opencover_note_page		0x6c		//开盖记录页地址
+	#define		ee_opencovernote_inpage		ee_openrelaynote_inpage+ee_openrelaynote_lenth
+	#define		ee_opencovernote_lenth		28
+
+#define		ee_jieshuanrecord_page		0x76		//结算日编程记录页地址
+	#define		ee_jieshuanrecord_inpage	0
+	#define		ee_jieshuanrecord_lenth		16	
+#define		ee_setclock_note_page		0x76		//设置时钟记录页地址
+	#define		ee_setclocknote_inpage		ee_jieshuanrecord_inpage+ee_jieshuanrecord_lenth
+	#define		ee_setclocknote_lenth		16
+#define		ee_relayerr_note_page		0x76		//负荷开关异常记录页地址
+	#define		ee_relayerrnote_inpage		ee_setclocknote_inpage+ee_setclocknote_lenth
+	#define		ee_relayerrnote_lenth		29
+	
+#define		ee_program_note_page		0x80		//编程事件页地址
+	#define		ee_programnote_inpage		0
+	#define		ee_programnote_lenth		50
+	#define		max_eventrecord_p		10	//事件指针最大值(10次)
+#define		ee_combstatusrecord_page	0x80		//有功组合状态字记录页地址
+	#define		ee_combstatusrecord_inpage	ee_programnote_inpage+ee_programnote_lenth
+	#define		ee_combstatusrecord_lenth	11
+	
+#define		ee_shiqurecord_page		0x8a		//时区表编程记录页地址
+	#define		ee_shiqurecord_lenth		57
+#define		ee_shiduanrecord_page		0x94		//时段表编程记录页地址
+	#define		ee_shiduanrecord_lenth		57
+	
+//------------------整点冻结记录区
+#define         ee_hourfreezedl_page	        0x9e		//整点冻结电量页地址
+	#define		ee_hourfreezedl_lenth		13	//数据长度13字节
+	#define		max_hourfreeze_p		254	//整点冻结电量指针最大值(254整点)
+#define         ee_dayfreezemoney_page	        0x9e		//日冻结金额页地址
+	#define		ee_dayfreezemoney_inpage	52
+	#define		ee_dayfreezemoney_lenth		10	//数据长度10字节
+	
+//------------------规格区
+#define		ee_meterpos_page		0xdc		//电能表位置信息
+	#define		ee_meterpos_inpage		52
+	#define		ee_meterpos_lenth		11	
+#define		ee_zichannum_page		0xdd		//资产管理编码页地址
+	#define		ee_zichannum_inpage		26
+	#define		ee_zichannum_lenth		32	
+	
+//------------------其他冻结记录区
+#define		ee_timingfreeze_dl_page		0xde		//定时冻结数据页地址
+	#define		max_timingfreeze_p		60	//约定冻结电量指针最大值(60次)
+#define		ee_dayfreezedl_page		0x156		//日冻结数据页地址
+	#define		ee_dayfreezedl_len		55
+	#define		max_dayfreeze_p			62	//日冻结电量指针最大值(62天)
+#define		ee_realtimefreeze1_page		0x1d2		//瞬时冻结冻结页地址
+#define		ee_appointfreeze1_page		0x1d8		//时区转换约定冻结页地址
+#define		ee_appointfreeze2_page		0x1dc		//时段转换约定冻结页地址
+#define		ee_appointfreeze3_page		0x1e0		//费率转换约定冻结页地址
+#define		ee_appointfreeze4_page		0x1e4		//阶梯转换约定冻结页地址
+	#define		ee_freezedl_lenth		48	//数据长度24字节(共48字节存放2页)
+#define         ee_histroy_dl_page              0x1e8		//结算日电量页地址
+	#define		ee_histroydl_lenth		48	//数据长度24字节(共48字节存放2页)
+	#define		max_histroy_p			12	//结算电量指针最大值(12)
+	
+//------------------负荷记录区
+#define		ee_ploadrec_page		0xde
+	#define		max_ploadrec_p			289
+	#define		ee_ploadrec1_inpage		24	//时间(5)+电压(2)+电流(3)+频率(2)
+		#define		ee_ploadrec1_len	12
+	#define		ee_ploadrec2_inpage     	36	//时间(5)+有功功率(3)
+		#define		ee_ploadrec2_len	8
+	#define		ee_ploadrec3_inpage		44	//时间(5)+功率因数(2)
+		#define		ee_ploadrec3_len	7
+	#define		ee_ploadrec4_inpage		51	//时间(5)+正反向总电量(8)
+		#define		ee_ploadrec4_len	13
+
+#define		ee_illegalcardnum_page		0x1ff		//非法插卡次数页
+	#define		ee_illegalcardnum_inpage	24
+	#define		ee_illegalcardnum_len		20
+
+//------------------密钥区
+#define		ee_keydata_1_page			0x240		//编号0 的32字节密钥+编号1 的32字节密钥，依次向下每页2组
+#define		ee_jtsqswith_note_page		0x250		//阶梯时区切换冻结
+	#define		ee_jtsqswith_note_inpage	0
+#define		ee_modeswith_note_page		0x254		//费控模式切换冻结
+	#define		ee_modeswith_note_inpage	0
+#define		ee_flpricerecord_page		0x258	//费率表编程记录
+	#define		ee_flpricerecord_inpage		0	
+	#define		ee_flpricerecord_len		42			
+#define		ee_jtpricerecord2_page		0x300		//阶梯表编程记录
+	#define		ee_jtpricerecord2_inpage	0	
+	#define		ee_jtpricerecord2_len		70
+
+#define		ee_ladder1_page			0x350		//当前套阶梯表电量/电价，4张表，每页一张表
+#define		ee_ladder2_page			0x354		//备用套阶梯表电量/电价，4张表，每页一张表
+	#define		ee_ladder_lenth			70	
+
+//;=============================相关常数定义＝==========================================
+#define		maxtimes			6		//最大脉冲倍数,96A时,7个脉冲/s
+#define		max_maxholiday			60		//最大公共假日数
+#define		default_updatemoneytimer	120		//默认钱包更新时间(min),范围必须在15min~240min之间
+#define		ms_timer_delay			115		//460ms时标定时,刷新显示
+#define		comm_led_timer_delay		5		//5s通讯指示灯
+#define		shiduanctrl_timer_delay		20		//80ms时段改变输出定时器延时
+#define		max_shiduancount		14		//最大时段14字节时段表
+#define		default_loopdisplaytimer	5		//默认的循显时间5s
+#define		default_keydisplaytimer		60		//默认按键显示时间为60s
+#define		lcdled_timer_delay		60		//60s背光亮
+#define	 	disp_num			33		//显示列表中的项目数
+
+#define 	ESAM				0		//esam
+#define 	CARD				1		//IC card
+#define 	u7816_buf_size			220		//
+
+//;==============================变量类型定义＝============================================
+typedef unsigned char	uint08; 		//unsigned 8 bit data
+typedef unsigned short	uint16;
+typedef	unsigned long int uint32;
+
+typedef signed char	int08; 			//unsigned 8 bit data
+typedef signed short	int16;
+typedef	signed long int	int32;
+
+unsigned char  EA;
+
+typedef union
+{
+  unsigned char B08;
+  struct
+  {
+    unsigned char bit0:1;
+    unsigned char bit1:1;
+    unsigned char bit2:1;
+    unsigned char bit3:1;
+    unsigned char bit4:1;
+    unsigned char bit5:1;
+    unsigned char bit6:1;
+    unsigned char bit7:1;
+  }Bit;
+}B08_Bit;
+
+
+union B16_B08
+{
+	unsigned char B08[2];
+	uint16  B16;
+};
+
+union S16_B08
+{
+	unsigned char B08[2];
+	int16  S16;
+};
+
+union B32_B08
+{
+	unsigned char     B08[4];
+	unsigned long int B32;
+};
+
+struct B32ADDB08
+{
+	union B32_B08     E32;
+	uint08		  B08;
+};
+
+struct MONEY_FRM
+{
+	uint08		Remain[6];			//剩余金额
+	uint08		Tick[6];			//赊欠金额
+	union B32_B08	Buy_Times;			//购电次数
+	union B16_B08	Crc16;				//crc16
+};
+
+struct FWDL_FRM
+{
+	union B32_B08	Fwdl_T;				//正向总电量
+	union B32_B08	Fwdl[4];			//费率1~4正向电量
+	union B32_B08	Usedl;				//本月正向用电量
+	union B16_B08	Crc16;				//crc
+};
+
+struct BKDL_FRM
+{
+	union B32_B08	Bkdl_T;				//反向总电量
+	union B32_B08	Bkdl[4];			//费率1~4反向电量
+	union B32_B08	Usedl;				//本月反向用电量
+	union B16_B08	Crc16;				//crc	
+};
+
+
+struct LOADREC_FRM
+{
+	union B16_B08	Validpoint[4];			//有效指针
+	union B16_B08	Point[4];			//查找指针
+	union B16_B08 	Crc16;				//CRC校验码
+};
+
+
+struct METERCONST_FRM
+{
+	union B32_B08	Const;				//脉冲常数bcd码,4字节,高字节在前
+	union B16_B08 	Crc16;				//CRC校验码
+	uint08		Const_H;			//0.01kwh的脉冲数
+};
+
+struct PARA_ESAM_FRM
+{
+	union B32_B08	Alarm_Limit1;			//报警金额1
+	union B32_B08	Alarm_Limit2;			//报警金额2
+	uint08		Current_Ratio[3];		//电流变比
+	uint08		Voltage_Ratio[3];		//电压变比
+	uint08		Meter_Id[6];			//表号
+	uint08		User_Id[6];			//用户号
+	uint08		Card_Type;			//卡类型
+	union B16_B08	Identity_Delay;			//身份认证时效
+	union B16_B08 	Crc16;				//CRC校验码
+};
+
+struct PARA_LIMITMENORY_FRM
+{
+	union B32_B08	Tick;				//透支金额
+	union B32_B08	Regrate;			//囤积金额
+	union B32_B08	Closerelay;			//闭合继电器允许金额
+	union B16_B08 	Crc16;				//CRC校验码
+};
+
+struct PARA_DISPLAY_FRM
+{
+	uint08		S_Number;			//显示屏数
+	uint08		Loop_Time;			//循显时间
+	uint08		Dl_Dot;				//电量小数位数
+	uint08		P_Dot;				//功率小数位数
+	uint08		K_Number;			//按键显示屏数
+	uint08		Vthreshold;			//电池欠压阀值
+	uint08		MeterCtrl;			//费控模式字
+	uint08		A_Time;				//上电全显时间
+	union B16_B08 	Crc16;				//CRC校验码
+};
+
+struct COMM_ADDRESS_FRM
+{
+	uint08		Comm_Id[6];			//通讯地址
+	union B16_B08 	Crc16;				//CRC校验码
+};
+
+struct RTC_TRIMA_FRM
+{
+	union B16_B08	PTAT_Value[21];			//温度ADC
+	union B16_B08 	Crc16;				//CRC校验码
+};
+
+struct RTC_TRIMC_FRM
+{
+	union S16_B08	CAP_Value[21];			//电容偏置
+	union B16_B08 	Crc16;				//CRC校验码
+};
+
+struct STARTTIME_FRM
+{
+	uint08		Shiqu[5];			//新时区启动时间
+	uint08		Shiduan[5];			//新时段表启动时间
+	uint08		Rate[5];			//新费率电价启动时间
+	uint08		Ladder[5];			//新阶梯电价启动时间
+	uint08		LadSQ[5];			//阶梯时区切换时间
+	uint08		FKmode[5];			//费控模式切换时间(预留)
+	union B16_B08 	Crc16;				//CRC校验码
+};
+
+struct EMU_FRM
+{
+	union B32_B08	rate[5];
+//	union B32_B08	Uxxx;				//电压系数
+//	union B32_B08	I1xxx;				//电流1系数
+//	union B32_B08	I2xxx;				//电流2系数
+//	union B32_B08   P1xxx;				//功率系数
+//	union B32_B08 	Fxxx;				//BL频率系数
+	union B16_B08 	Crc16;				//CRC校验码
+};
+
+
+struct WEEK_FRM
+{
+	uint08		Status;				//周休日
+	uint08		Shiduan_N;			//时段表号(范围0~7)	
+	uint08		Lstarttimer[5];			//负荷记录起始时间,内部扩展年,共5字节(年在前)
+	uint16		Lspacetimer[4];			//第1~4类负荷记录间隔时间,共8字节(高字节在前)
+	union B16_B08	Max_I;				//过流事件电流触发下限
+	uint08		Max_I_Period;			//过流事件电流延时时间							
+	union B16_B08 	Crc16;				//CRC校验码	
+};
+
+
+struct PARA_FEATUREWORD_FRM
+{
+	uint08		Bps[1];				//通信口1
+	uint08		Comp_B;				//有功组合字
+	uint08		Freeze[6];			//负荷/定时/瞬时/约定/整点/日冻结模式字		
+	uint08		Feature1;			//特征字1
+	uint08		Report[8];			//上报模式字
+	uint08		Limit_I[3];			//继电器拉闸控制电流门限值
+	uint08		Exp_Timer[6];			//扩展分钟定时bcd码,分别为拉闸延时2,大电流拉闸延时2,红外认证时间1,上报自动复位时间1
+	uint08		Wz_Clocerelay;			//继电器合闸允许方式(0x55内置表示自动合闸,0x55外置表示手动合闸)
+	uint08		Plc;				//扩展模式字,0x0A或者0xAA每天20:00复位载波一次(主要针对瑞斯康载波),0xA0或者0xAA反向点亮背光
+	uint08		Other;				//预留
+	uint08		Zbps[1];			//载波通信口
+	union B16_B08 	Crc16;				//CRC校验码
+};
+
+
+struct TEMPERATURE_FRM
+{
+	uint08		Offset[8];			//温度调整系数8字节
+	uint08		RtcTMode;			//RTC补偿工作模式，0x55:测试模式，0xAA常温查表插值模式，其他：普通模式
+	union B16_B08	XLcap;				//晶体匹配电容
+	union B16_B08 	Crc16;				//CRC校验码
+};
+
+
+struct PRICE_FRM
+{
+	union B32_B08	Ladder_Dl[6];			//当前阶梯电量
+	union B32_B08	Ladder[7];			//当前阶梯电价
+	uint08		Year_Ladder[18];		//当前年阶梯结算日1~6
+	union B16_B08 	Crc16a;				//CRC校验码
+	union B32_B08	Tariff[4];			//当前费率电价表
+	union B16_B08 	Crc16c;				//CRC校验码
+	union B32_B08   Current_L;			//当前阶梯电价
+	union B32_B08   Current_F;			//当前费率电价
+	union B32_B08   Current;			//当前电价
+	union B32_B08   Current_X;			//当前电价乘以变比后电价
+	uint08		Ladder_Mode;		//结算模式字,0x00为月结算,0x55为年结算
+};
+
+struct TARIFF_FRM
+{
+	uint08		Table[42];			//当前费率时段表,3*14＝42字节
+	union B16_B08 	Crc16;				//CRC校验码
+	uint08		Current;			//当前费率(范围0~3)
+	uint08		Current_Ladder;			//当前阶梯(范围0~4)
+	uint08		Current_N;			//当前时段表号(范围0~7)
+	uint08		Period_N;			//当前时段号(范围0~13)
+	uint08		CurLad_N;			//当前阶梯表号(范围0~3)
+	uint08		Status;				//bit3时区/bit2时段表/bit1费率/bit0阶梯(0:第一套；1:第二套)
+		
+};
+
+
+struct ITEM_FRM
+{
+	uint08		 Display[62];			//显示项目1*62存放在1页,共4页
+	union B16_B08 	 Crc16;
+};
+
+struct SYS_CLOCK_FRM
+{
+	uint08   	Clockmain[7];			//系统时钟,[0]秒[1]分[2]时[3]周[4]日[5]月[6]年
+	uint08   	Clockbackup[7];			//系统时钟,[0]秒[1]分[2]时[3]日[4]月[5]年[6]周
+//	uint08   	Status;				//时钟状态字
+};
+
+struct UIP_FRM
+{
+	union B32_B08   U;				//电压xxxxxxx.x
+	union B32_B08   I1;				//电流xxxxx.xxx
+	union B32_B08   P1;				//有功功率xxxx.xxxx
+	union B32_B08   I2;				//零线电流xxxxx.xxx	
+	union B32_B08   P2;				//视在功率xxxx.xxxx
+	union B32_B08   Cosa;				//功率因数xxxxx.xxx
+	union B32_B08   Pav;				//一分钟平均功率xxxx.xxxx
+	union B32_B08   Freq;				//电网频率
+};
+
+struct FUNCTION_FRM
+{
+	union B16_B08   Temper_M;			//当前电表温度xxx.x
+	union B16_B08   Voltage_B;			//当前电池电压xx.xx
+	union B32_B08   Voltage_B_T;			//电池电压工作时间xxxxxxxx(hex保存)
+	union B16_B08 	Crc16;				//
+};
+
+struct TIMER_FRM
+{
+	uint08		Timer;				//定时器
+	uint08		Status;				//状态
+};
+
+struct DECIMAL_FRM
+{
+	uint08		Fw[1];	//正向脉冲尾数
+	uint08		Bk[1];	//反向脉冲尾数
+	uint08		Unit_Pluse;		//单位正向电量累计(0.01kwh的倍数)
+	uint08		Unit_Bkpluse;	//单位反向电量累计(0.01kwh的倍数)
+	uint08		Status;			//bit0整度更新;bit1金额变化;bit2钱包更新,其他预留
+};
+
+struct DISPALY_FRM
+{
+	uint08		Number;				//显示号
+	uint08		Timer;				//显示时间
+	uint08		Status;				//状态
+};
+
+struct EEPROM_FRM
+{
+	uint08		Buffer[64];			//数据ee处理缓冲/lcd显示缓冲复用
+	uint08		Status;				//状态字节
+};
+
+struct HisEvent_STR
+{
+	uint16 	        DI21;	
+	uint16  	page;
+	unsigned char  	offset;
+	unsigned char  	len;
+	unsigned char  	offset2;
+};
+
+struct ADCDATA_FRM
+{
+	uint16		Buffer[16];			//ADC结果
+	uint08		ReadCount;			//计数
+};
+
+struct FEIK_FRM
+{
+	unsigned char Num[8];
+	union B16_B08 Crc16;
+};
+
+struct TIMER2_FRM
+{
+	//0非法插卡次数(4)
+	//1过流持续时间(4)
+	//2电池欠压总累计时间(4)
+	//3掉电总累计时间(4)
+	//4电池工作时间(4) 
+	union B32_B08	Times[5];
+};
+
+//定义通信超时时间常数
+#define txtimeout_max	125				//500ms，串口字符间最大延时
+#define rxtimeout_max	125  				//500ms 
+#define framedelay_mx	15 				//60ms
+//通信缓冲区最大长度定义
+#define	utx_buf_size	230				//通信缓冲区最大长度＝220
+#define	urx_buf_size	230				//通信缓冲区最大长度＝220
+
+struct COMMUNICATION_FRM
+{
+	uint08 Buf[ urx_buf_size ];			//接收缓冲/发送缓冲
+	uint08 Len;					//接收长度字节/发生长度
+	uint08 Total_Len;				//接收总长度/发送总长度
+	uint08 Step;  					//接收步骤
+	uint08 Flag;  					//通讯标志
+	uint08 Response_Timer;				//通讯响应定时器
+	uint08 Overtime_Timer;				//通讯接收或者发生超时定时器
+};
+#endif
+

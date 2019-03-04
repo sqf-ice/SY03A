@@ -1,0 +1,199 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.17.0.0
+Copyright (C) 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: ggg User, china, LIC=LSNNN-YTFX9-PZYWB-2LCBA-KEDBV-82H18
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Standard  Version: 5.17
+Toolchain Path:  C:\Keil\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 1 (build 61)
+Assembler:       Armasm.exe V5.06 update 1 (build 61)
+Linker/Locator:  ArmLink.exe V5.06 update 1 (build 61)
+Library Manager: ArmAr.exe V5.06 update 1 (build 61)
+Hex Converter:   FromElf.exe V5.06 update 1 (build 61)
+CPU DLL:         SARMCM3.DLL V5.17
+Dialog DLL:      DARMCM1.DLL V1.12.0.0
+Target DLL:      Segger\JL2CM3.dll V2.99.16.0
+Dialog DLL:      TARMCM1.DLL V1.9.0.0
+ 
+<h2>Project:</h2>
+F:\DI05A-20180731\Project\DI05A.uvprojx
+Project File Date:  08/27/2018
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 1 (build 61)', folder: 'C:\Keil\ARM\ARMCC\Bin'
+Rebuild target 'V85XX'
+compiling v85xx_CodeRAM.c...
+compiling v85xx_cortex.c...
+compiling v85xx_LoadNVR.c...
+compiling v85xx_adc_tiny.c...
+compiling v85xx_ana.c...
+compiling v85xx_adc.c...
+compiling v85xx_clk.c...
+compiling v85xx_comp.c...
+compiling v85xx_crypt.c...
+compiling v85xx_flash.c...
+compiling v85xx_dma.c...
+compiling v85xx_gpio.c...
+compiling v85xx_lcd.c...
+compiling v85xx_i2c.c...
+compiling v85xx_iso7816.c...
+compiling v85xx_misc.c...
+compiling v85xx_pwm.c...
+compiling v85xx_pmu.c...
+compiling v85xx_spi.c...
+compiling v85xx_rtc.c...
+compiling v85xx_tmr.c...
+compiling v85xx_u32k.c...
+compiling v85xx_version.c...
+compiling v85xx_uart.c...
+assembling startup_V85XX.s...
+startup_V85XX.s(513): warning: A1581W: Added 2 bytes of padding at address 0x1c6
+compiling v85xx_wdt.c...
+compiling v_stdio.c...
+compiling mainproc.c...
+compiling Factory.c...
+compiling event.c...
+compiling FM17520.C...
+compiling iokey.c...
+compiling i2c.c...
+compiling init.c...
+..\Src\init.c(566): warning:  #550-D: variable "Temp16" was set but never used
+  	int16 Temp16;
+..\Src\init.c: 1 warning, 0 errors
+compiling LCD.c...
+compiling money.c...
+compiling rtc.c...
+compiling tariff.c...
+compiling u7816.c...
+..\Src\u7816.c(1333): warning:  #175-D: subscript out of range
+  		memcpy(CRCtemp[2].B08, &Ic_Comm_RxBuf[2], 2);
+..\Src\u7816.c(1334): warning:  #175-D: subscript out of range
+  		if( CRCtemp[2].B16 != Crc_16Bits( &Refers_File_Mac[BACKADDR[5]], 16 ) ) return 1;	
+..\Src\u7816.c(1522): warning:  #177-D: variable "Result" was declared but never referenced
+  	unsigned char Result;
+..\Src\u7816.c(1656): warning:  #177-D: variable "Length" was declared but never referenced
+  	unsigned char Result, Length;
+..\Src\u7816.c(1657): warning:  #177-D: variable "Buf" was declared but never referenced
+  	unsigned char Buf[64];
+..\Src\u7816.c(1419): warning: C4488E: write to variable 'CRCtemp' with offset out of bounds
+}
+..\Src\u7816.c(1419): warning: C4488E: write to variable 'CRCtemp' with offset out of bounds
+}
+..\Src\u7816.c(1419): warning: C4487E: read from variable 'CRCtemp' with offset out of bounds
+}
+..\Src\u7816.c: 8 warnings, 0 errors
+compiling UEnergy-rn.C...
+..\Src\UEnergy-rn.C(122): warning:  #177-D: variable "r" was declared but never referenced
+  	unsigned char i,r, Temp; 
+..\Src\UEnergy-rn.C(122): warning:  #177-D: variable "Temp" was declared but never referenced
+  	unsigned char i,r, Temp; 
+..\Src\UEnergy-rn.C(159): warning:  #177-D: variable "Temp08" was declared but never referenced
+  	unsigned int  j,Temp08;
+..\Src\UEnergy-rn.C(160): warning:  #177-D: variable "h" was declared but never referenced
+          unsigned char i,h;
+..\Src\UEnergy-rn.C(249): warning:  #177-D: variable "r" was declared but never referenced
+  	unsigned char i,r,n,Lenth;
+..\Src\UEnergy-rn.C(249): warning:  #177-D: variable "n" was declared but never referenced
+  	unsigned char i,r,n,Lenth;
+..\Src\UEnergy-rn.C(250): warning:  #177-D: variable "TempBuf" was declared but never referenced
+  	unsigned char  TempBuf[5];
+..\Src\UEnergy-rn.C(298): warning:  #177-D: variable "r" was declared but never referenced
+  	unsigned char i,r,n,Lenth;
+..\Src\UEnergy-rn.C(298): warning:  #177-D: variable "n" was declared but never referenced
+  	unsigned char i,r,n,Lenth;
+..\Src\UEnergy-rn.C(298): warning:  #177-D: variable "Lenth" was declared but never referenced
+  	unsigned char i,r,n,Lenth;
+..\Src\UEnergy-rn.C(299): warning:  #177-D: variable "TempBuf" was declared but never referenced
+  	unsigned char  TempBuf[5];
+..\Src\UEnergy-rn.C(344): warning:  #177-D: variable "S1_Temp" was declared but never referenced
+  	union B32_B08 S1_Temp;	
+..\Src\UEnergy-rn.C(394): warning:  #177-D: variable "SPIOpResult" was declared but never referenced
+  	unsigned char SPIOpResult, i, j;
+..\Src\UEnergy-rn.C(394): warning:  #177-D: variable "i" was declared but never referenced
+  	unsigned char SPIOpResult, i, j;
+..\Src\UEnergy-rn.C(394): warning:  #177-D: variable "j" was declared but never referenced
+  	unsigned char SPIOpResult, i, j;
+..\Src\UEnergy-rn.C(395): warning:  #177-D: variable "P_flag" was declared but never referenced
+  	unsigned long int P_flag;
+..\Src\UEnergy-rn.C(396): warning:  #177-D: variable "temp" was declared but never referenced
+  	float temp,sztemp;
+..\Src\UEnergy-rn.C(396): warning:  #177-D: variable "sztemp" was declared but never referenced
+  	float temp,sztemp;
+..\Src\UEnergy-rn.C(1011): warning:  #177-D: variable "SPIOpData" was declared but never referenced
+  	union B32_B08 SPIOpData;
+..\Src\UEnergy-rn.C(1012): warning:  #177-D: variable "i" was declared but never referenced
+  	unsigned char i, SPIOpResult;
+..\Src\UEnergy-rn.C(1012): warning:  #177-D: variable "SPIOpResult" was declared but never referenced
+  	unsigned char i, SPIOpResult;
+..\Src\UEnergy-rn.C(1382): warning:  #177-D: variable "i" was declared but never referenced
+  	 unsigned char i;
+..\Src\UEnergy-rn.C(1383): warning:  #177-D: variable "SPIOpData2" was declared but never referenced
+           union B32_B08 SPIOpData2;
+..\Src\UEnergy-rn.C(2621): warning:  #940-D: missing return statement at end of non-void function "Check_Err_Pro"
+  }
+..\Src\UEnergy-rn.C: 24 warnings, 0 errors
+compiling verify.c...
+compiling uartx.c...
+compiling v85xx_isr.c...
+compiling STS.c...
+..\Src\STS.c(362): warning:  #177-D: variable "n" was declared but never referenced
+  	INT8U e,n;
+..\Src\STS.c(629): warning:  #177-D: variable "s_tidRec" was declared but never referenced
+  	APDU_TID_REC  s_tidRec;
+..\Src\STS.c(735): warning:  #177-D: variable "tmp_32u" was declared but never referenced
+   union  Union_DWordDef tmp_32u;
+..\Src\STS.c(777): warning:  #550-D: variable "s_tidRec" was set but never used
+   APDU_TID_REC  s_tidRec;
+..\Src\STS.c(901): warning:  #177-D: variable "s_tidRec" was declared but never referenced
+  	APDU_TID_REC  s_tidRec;
+..\Src\STS.c(1212): warning:  #177-D: variable "tmp_32u" was declared but never referenced
+      union Union_DWordDef tmp_32u,tmp_bcd4;
+..\Src\STS.c(1212): warning:  #177-D: variable "tmp_bcd4" was declared but never referenced
+      union Union_DWordDef tmp_32u,tmp_bcd4;
+..\Src\STS.c(1213): warning:  #177-D: variable "tmp_bcd4_buy" was declared but never referenced
+      union Union_DWordDef tmp_32u_buy,tmp_bcd4_buy;
+..\Src\STS.c(1214): warning:  #177-D: variable "tmp_u32_creditMAX" was declared but never referenced
+      union Union_DWordDef tmp_u32_creditMAX; 
+..\Src\STS.c(1215): warning:  #177-D: variable "tmp_s32_credit" was declared but never referenced
+      INT32S tmp_s32_credit;
+..\Src\STS.c(1218): warning:  #177-D: variable "amount_add_fg" was declared but never referenced
+      INT8U  amount_add_fg;	
+..\Src\STS.c(1298): warning:  #177-D: variable "LCD_DIS" was declared but never referenced
+   INT8U LCD_DIS = 0;
+..\Src\STS.c(1419): warning:  #177-D: variable "tmp_32u_mpl" was declared but never referenced
+   union  Union_DWordDef tmp_32u_mpl,tmp_bcd4_mpl;
+..\Src\STS.c(1419): warning:  #177-D: variable "tmp_bcd4_mpl" was declared but never referenced
+   union  Union_DWordDef tmp_32u_mpl,tmp_bcd4_mpl;
+..\Src\STS.c(1559): warning:  #177-D: variable "tmp_bcd_byte" was declared but never referenced
+   INT8U tmp_bcd_byte[10];
+..\Src\STS.c(1562): warning:  #177-D: variable "crc_tmp" was declared but never referenced
+   INT16U crc_tmp;
+..\Src\STS.c: 16 warnings, 0 errors
+linking...
+Program Size: Code=94798 RO-data=2726 RW-data=420 ZI-data=7052  
+".\Objects\template.axf" - 0 Error(s), 50 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.4.5.0.pack
+                ARM::CMSIS:CORE:4.3.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 4.3.0
+
+<h2>Collection of Component include folders:</h2>
+  F:\DI05A-20180731\Project\RTE
+  C:\Keil\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:4.3.0
+Build Time Elapsed:  00:00:16
+</pre>
+</body>
+</html>
